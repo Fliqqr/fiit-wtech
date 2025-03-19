@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - eShop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333;
+            padding: 15px;
+            color: white;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar a { color: white; text-decoration: none; }
+        .container {
+            margin-top: 80px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .product-image {
+            width: 300px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .product-info {
+            max-width: 600px;
+        }
+        .price {
+            font-size: 24px;
+            color: #e60000;
+            margin: 15px 0;
+        }
+        .add-to-cart {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .add-to-cart:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="products.html">&larr; Back to Products</a>
+        <div class="logo">eShop</div>
+        <div class="account">&#128100; Account</div>
+    </div>
+    
+    <div class="container">
+        <img src="placeholder.jpg" alt="Product Name" class="product-image">
+        <div class="product-info">
+            <h1>Product Name</h1>
+            <p class="price">$99.99</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc placerat dapibus.</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+</body>
+</html>
