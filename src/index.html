@@ -4,52 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eShop Landing Page</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; height: 100vh; }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #333;
-            padding: 15px;
-            color: white;
-        }
-        .navbar input {
-            padding: 5px;
-            width: 200px;
-        }
-        .navbar .account {
-            cursor: pointer;
-        }
-        .main {
-            display: flex;
-            flex: 1;
-        }
-        .category {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f4f4f4;
-            text-align: center;
-            border-right: 1px solid #ddd;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .category:last-child {
-            border-right: none;
-        }
-        .category:hover {
-            background: #e0e0e0;
-        }
-        .footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
     <div class="navbar">
@@ -58,15 +13,26 @@
         <div class="account">&#128100; Account</div>
     </div>
     
-    <div class="main">
-        <a href="products.html" class="category">Category 1</a>
-        <a href="products.html" class="category">Category 2</a>
-        <a href="products.html" class="category">Category 3</a>
-    </div>
-    
-    <div class="footer">
-        <p>&copy; 2025 eShop. All rights reserved.</p>
-        <p>Contact | Privacy Policy | Terms of Service</p>
+    <div class="content-wrapper">
+        <div class="main">
+            <a href="products.html" class="category">
+                <img src="../images/pc.jpg" alt="Pre-built PCs">
+                <span>Pre-built PCs</span>
+            </a>
+            <a href="products.html" class="category">
+                <img src="../images/cpu.jpg" alt="PC Components">
+                <span>PC Components</span>
+            </a>
+            <a href="products.html" class="category">
+                <img src="../images/monitor.jpg" alt="Peripherals">
+                <span>Peripherals</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 eShop. All rights reserved.</p>
+            <p>Contact | Privacy Policy | Terms of Service</p>
+        </div>
     </div>
 </body>
 </html>
