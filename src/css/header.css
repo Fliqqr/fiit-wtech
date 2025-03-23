@@ -1,0 +1,121 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 15px;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #555;
+    transition: background 0.3s;
+}
+
+.navbar .logo:hover {
+    background: #666;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 5px;
+    width: 300px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    flex: 1;
+    border-radius: 20px 0 0 20px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px 20px 20px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #666;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.navbar .account a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .account {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #555;
+    transition: background 0.3s;
+}
+
+.navbar .account:hover {
+    background: #666;
+}
+
+.navbar .cart a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #555;
+    transition: background 0.3s;
+}
+
+.navbar .cart a:hover {
+    background: #666;
+}
+
+@media (max-width: 768px) {
+    .search-bar {
+        width: 120px;
+    }
+
+    .search-bar input {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+
+    .search-bar button {
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+
+    .navbar .account,
+    .navbar .cart a {
+        padding: 3px 8px;
+        font-size: 14px;
+    }
+
+    .navbar-actions {
+        gap: 3px;
+    }
+}

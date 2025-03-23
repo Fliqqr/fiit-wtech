@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - eShop</title>
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html" class="logo">eShop</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button type="submit">🔍</button>
+        </div>
+        <div class="navbar-actions">
+            <div class="cart"><a href="cart.html">🛒</a></div>
+            <div class="account"><a href="login.html">👤 Account</a></div>
+        </div>
+    </div>
+
+    <div class="cart-container">
+        <div class="progress-bar">
+            <span class="active">Shopping cart</span>
+            <span>&rarr;</span>
+            <span>Delivery</span>
+            <span>&rarr;</span>
+            <span>Payment</span>
+        </div>
+
+        <div class="cart-items">
+            <div class="cart-item">
+                <div class="item-image">📷</div>
+                <div class="item-details">
+                    <p>Product name</p>
+                    <div class="quantity">
+                        <button>-</button>
+                        <span>2</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div class="item-price">55 €</div>
+                <button class="remove-item">×</button>
+            </div>
+            <div class="cart-item">
+                <div class="item-image">📷</div>
+                <div class="item-details">
+                    <p>Product name</p>
+                    <div class="quantity">
+                        <button>-</button>
+                        <span>1</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div class="item-price">10 €</div>
+                <button class="remove-item">×</button>
+            </div>
+            <div class="cart-item">
+                <div class="item-image">📷</div>
+                <div class="item-details">
+                    <p>Product name</p>
+                    <div class="quantity">
+                        <button>-</button>
+                        <span>3</span>
+                        <button>+</button>
+                    </div>
+                </div>
+                <div class="item-price">5 €</div>
+                <button class="remove-item">×</button>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total</span>
+                <span>80 €</span>
+            </div>
+            <div class="cart-actions">
+                <a href="products.html">Back to product page</a>
+                <button>Continue</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 eShop. All rights reserved.</p>
+        <p>Contact | Privacy Policy | Terms of Service</p>
+    </div>
+</body>
+</html>
