@@ -10,3 +10,81 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
+.register-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.register-box {
+    background: #d3d3d3;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.register-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.register-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.register-box input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.register-box button {
+    padding: 10px;
+    background: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-box button:hover {
+    background: #444;
+}
+
+.register-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.register-links a {
+    color: #333;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .register-box {
+        padding: 15px;
+        max-width: 300px;
+    }
+
+    .register-box h2 {
+        font-size: 20px;
+    }
+
+    .register-box input,
+    .register-box button {
+        font-size: 14px;
+    }
+}

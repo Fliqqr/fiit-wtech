@@ -135,6 +135,16 @@ body {
 }
 
 @media (max-width: 768px) {
+    .progress-bar {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .progress-bar span {
+        padding: 8px 8px;
+        font-size: 15px;
+    }
+
     .cart-item {
         flex-wrap: wrap;
         gap: 10px;
