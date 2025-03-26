@@ -26,9 +26,19 @@
       <div class="container">
         <div class="sidebar">
           <h3>Filters</h3>
-          <label><input type="checkbox" /> Category 1</label><br />
-          <label><input type="checkbox" /> Category 2</label><br />
-          <label><input type="checkbox" /> Category 3</label><br />
+          
+          <label for="category-select">Category:</label>
+          <select id="category-select">
+            <option value="all">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home & Kitchen</option>
+            <option value="sports">Sports</option>
+          </select>
+          
+          <label for="price-range">Max Price: <span id="price-value">100</span></label>
+          <input type="range" id="price-range" min="0" max="1000" value="100" step="10" oninput="document.getElementById('price-value').innerText = this.value">
+
           <label><input type="checkbox" /> In Stock</label><br />
           <label><input type="checkbox" /> On Sale</label><br />
         </div>

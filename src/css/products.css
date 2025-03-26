@@ -25,7 +25,14 @@ body {
     width: 250px;
     padding: 20px;
     background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
 }
+
+.sidebar * {
+    margin: 5px;
+}
+
 .products-section {
     flex: 1;
     padding: 20px;

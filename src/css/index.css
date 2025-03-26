@@ -21,6 +21,7 @@ body {
 .main {
     display: flex;
     flex: 1;
+    overflow-x: hidden;
 }
 .category {
     flex: 1;
@@ -35,14 +36,20 @@ body {
     color: black;
     padding: 20px;
 }
+
+.category:hover img {
+    width: 120%;
+}
+
 .category img {
     width: 100%;
     height: auto;
     max-height: 300px;
     object-fit: cover;
+    transition: width 1s;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 760px) {
     .main {
         flex-direction: column;
     }
