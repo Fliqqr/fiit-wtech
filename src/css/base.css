@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* display: grid; */
+    /* grid-template-rows: 10vh 80vh 10vh; */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+}

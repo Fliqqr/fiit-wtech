@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,15 +9,15 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-}
+} */
 
-.content-wrapper {
+/* .content-wrapper {
     flex: 1;
     overflow-y: auto;
     margin-top: 60px;
     display: flex;
     flex-direction: column;
-}
+} */
 .main {
     display: flex;
     flex: 1;
@@ -38,7 +38,7 @@ body {
 .category img {
     width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 300px;
     object-fit: cover;
 }
 

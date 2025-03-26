@@ -1,0 +1,82 @@
+
+Table users {
+  id integer [primary key]
+  username varchar
+  password varchar
+  email varchar
+  created_at timestamp 
+}
+
+Table users_shopping_history {
+  id integer [primary key]
+  user_id integer
+  total_price float
+  created_at timestamp
+  invoice_id integer
+}
+
+Table bought_items {
+  id integer [primary key]
+  history_id integer
+  product_id integer
+  price float
+  applied_discount integer
+}
+
+Table in_shopping_cart {
+  id integer [primary key]
+  user_id integer
+  product_id integer
+  amount integer
+}
+
+Table producs {
+  id integer [primary key]
+  name varchar
+  description varchar
+  image_url varchar
+  created_at timestamp
+  price float
+  in_stock integer
+}
+
+Table product_categories {
+  id integer [primary key]
+  name varchar
+}
+
+Table product_tags {
+  id integer [primary key]
+  product_id integer
+  category_id integer
+}
+
+Table discounts {
+  id integer [primary key]
+  product_id integer
+  category_id integer
+  discount_percentage float
+  created_at timestamp
+  valid_until timestamp
+}
+
+
+Ref: "in_shopping_cart"."user_id" > "users"."id"
+
+Ref: "producs"."id" < "in_shopping_cart"."product_id"
+
+Ref: "product_tags"."product_id" > "producs"."id"
+
+Ref: "product_categories"."id" < "product_tags"."category_id"
+
+Ref: "producs"."id" < "discounts"."product_id"
+
+Ref: "product_categories"."id" < "discounts"."category_id"
+
+Ref: "users"."id" < "users_shopping_history"."user_id"
+
+Ref: "users_shopping_history"."id" < "bought_items"."history_id"
+
+Ref: "producs"."id" < "bought_items"."product_id"
+
+Ref: "discounts"."id" < "bought_items"."applied_discount"

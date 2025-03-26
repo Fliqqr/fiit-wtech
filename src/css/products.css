@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,13 +8,14 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-}
-.content-wrapper {
+} */
+
+/* .content-wrapper {
     flex: 1;
     margin-top: 60px;
     display: flex;
     flex-direction: column;
-}
+} */
 .container {
     display: flex;
     width: 100%;
