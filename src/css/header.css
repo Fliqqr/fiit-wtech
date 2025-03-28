@@ -1,33 +1,33 @@
-.navbar {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #333;
+    background: var(--color-dark);
     padding: 15px;
-    color: white;
+    color: var(--color-background);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
 }
 
-.navbar .logo {
-    color: white;
+header .logo {
+    color: var(--color-background);
     text-decoration: none;
     padding: 5px 10px;
-    border-radius: 5px;
-    background: #555;
+    border-radius: 8px;
+    background: var(--color-primary);
     transition: background 0.3s;
 }
 
-.navbar .logo:hover {
-    background: #666;
+header .logo:hover {
+    background: var(--color-accent);
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: var(--color-background);
     border-radius: 20px;
     padding: 5px;
     width: 300px;
@@ -42,11 +42,13 @@
     flex: 1;
     border-radius: 20px 0 0 20px;
     font-size: 14px;
+    background: transparent;
+    color: var(--color-text);
 }
 
 .search-bar button {
-    background: #555;
-    color: white;
+    background: var(--color-accent);
+    color: var(--color-background);
     border: none;
     padding: 5px 10px;
     border-radius: 20px 20px 20px 20px;
@@ -55,7 +57,7 @@
 }
 
 .search-bar button:hover {
-    background: #666;
+    background: var(--color-accent);
 }
 
 .navbar-actions {
@@ -64,34 +66,31 @@
     gap: 5px;
 }
 
-.navbar .account a {
-    color: white;
+header .account a {
+    color: var(--color-background);
     text-decoration: none;
 }
 
-.navbar .account {
+header .account {
     cursor: pointer;
     padding: 5px 10px;
-    border-radius: 5px;
-    background: #555;
+    border-radius: 8px;
+    background: var(--color-primary);
     transition: background 0.3s;
 }
 
-.navbar .account:hover {
-    background: #666;
+header .account:hover,
+header .card a:hover{
+    background: var(--color-accent);
 }
 
-.navbar .cart a {
-    color: white;
+header .cart a {
+    color: var(--color-background);
     text-decoration: none;
     padding: 5px 10px;
-    border-radius: 5px;
-    background: #555;
+    border-radius: 8px;
+    background: var(--color-primary);
     transition: background 0.3s;
-}
-
-.navbar .cart a:hover {
-    background: #666;
 }
 
 @media (max-width: 768px) {
@@ -109,13 +108,9 @@
         font-size: 12px;
     }
 
-    .navbar .account,
-    .navbar .cart a {
+    header .account,
+    header .cart a {
         padding: 3px 8px;
         font-size: 14px;
-    }
-
-    .navbar-actions {
-        gap: 3px;
     }
 }

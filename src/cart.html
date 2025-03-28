@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/footer.css" />
   </head>
   <body>
-    <div class="navbar">
+    <header>
       <a href="index.html" class="logo">eShop</a>
       <div class="search-bar">
         <input type="text" placeholder="Search products..." />
@@ -20,7 +20,7 @@
         <div class="cart"><a href="cart.html">🛒</a></div>
         <div class="account"><a href="login.html">👤 Account</a></div>
       </div>
-    </div>
+    </header>
 
     <div class="cart-container">
       <div class="progress-bar">
@@ -33,61 +33,79 @@
 
       <div class="cart-items">
         <div class="cart-item">
-          <div class="item-image">📷</div>
+          <div class="item-image">
+            <img src="../images/GPU.jpg" alt="GPU">
+          </div>
           <div class="item-details">
-            <p>Product name</p>
-            <div class="quantity">
-              <button>-</button>
-              <span>2</span>
-              <button>+</button>
+            <p>Nvidia Graphics card</p>
+            <div class="item-row">
+              <div class="quantity">
+                <button>-</button>
+                <span>2</span>
+                <button>+</button>
+              </div>
+              <div class="item-controls">
+                <div class="item-price">55 €</div>
+                <button class="remove-item">×</button>
+              </div>
             </div>
           </div>
-          <div class="item-price">55 €</div>
-          <button class="remove-item">×</button>
         </div>
         <div class="cart-item">
-          <div class="item-image">📷</div>
+          <div class="item-image">
+            <img src="../images/Computer.jpg" alt="PC">
+          </div>
           <div class="item-details">
-            <p>Product name</p>
-            <div class="quantity">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+            <p>Pre-Built Gaming PC</p>
+            <div class="item-row">
+              <div class="quantity">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+              <div class="item-controls">
+                <div class="item-price">5 €</div>
+                <button class="remove-item">×</button>
+              </div>
             </div>
           </div>
-          <div class="item-price">10 €</div>
-          <button class="remove-item">×</button>
         </div>
         <div class="cart-item">
-          <div class="item-image">📷</div>
+          <div class="item-image">
+            <img src="../images/Cpu2.jpg" alt="CPU">
+          </div>
           <div class="item-details">
-            <p>Product name</p>
-            <div class="quantity">
-              <button>-</button>
-              <span>3</span>
-              <button>+</button>
+            <p>CPU</p>
+            <div class="item-row">
+              <div class="quantity">
+                <button>-</button>
+                <span>3</span>
+                <button>+</button>
+              </div>
+              <div class="item-controls">
+                <div class="item-price">10 €</div>
+                <button class="remove-item">×</button>
+              </div>
             </div>
           </div>
-          <div class="item-price">5 €</div>
-          <button class="remove-item">×</button>
         </div>
       </div>
 
       <div class="cart-footer">
-        <div class="total">
+        <div class="cart-total">
           <span>Total</span>
           <span>80 €</span>
         </div>
         <div class="cart-actions">
           <a href="products.html">Back to product page</a>
-          <button>Continue</button>
+          <a href="delivery.html">Continue</a>
         </div>
       </div>
     </div>
 
-    <div class="footer">
+    <footer>
       <p>&copy; 2025 eShop. All rights reserved.</p>
       <p>Contact | Privacy Policy | Terms of Service</p>
-    </div>
+    </footer>
   </body>
 </html>

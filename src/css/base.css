@@ -1,3 +1,11 @@
+:root {
+    --color-background: #FAF9F6;
+    --color-primary: #D87C63;
+    --color-accent: #A1887F;
+    --color-dark: #3E2723;
+    --color-text: #0c0c0c;
+}
+
 * {
     margin: 0;
     padding: 0;
