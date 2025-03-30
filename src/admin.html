@@ -3,89 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Products</title>
     <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/products.css" />
+    <link rel="stylesheet" href="./css/products.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/footer.css" />
-    <link rel="stylesheet" href="./css/admin.css" />
-    <title>Admin - Manage Products</title>
-    <style>
-
-    </style>
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">eShop</a>
-      <div class="search-bar">
-        <input type="text" placeholder="Search products..." />
-        <button type="submit">🔍</button>
-      </div>
+      <a href="index.html" class="logo">eShop Admin</a>
       <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="account"><a href="logout.html">🔒 Logout</a></div>
       </div>
     </header>
 
-    <div class="admin-page">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <h3>Admin Controls</h3>
-        <br/>
-        <div class="admin-search-bar">
-          <input type="text" placeholder="Search product..." />
-          <!-- <button>Search</button> -->
-        </div>
-        <div class="add-new-product">
-          <h3>Add new product</h3>
-          <input type="product-name" placeholder="Name" />
-          <input type="product-description" placeholder="Description" />
-          <input type="product-price" placeholder="Price" />
-          <input type="product-quantity" placeholder="Quantity" />
-          <button class="add-product-btn">Add New Product</button>
-        </div>
-      </div>
-
-      <!-- Product List -->
-      <div class="product-list">
-        <!-- Example Product 1 -->
-        <div class="product-item">
-          <img src="https://via.placeholder.com/250x150" alt="Product 1" />
-          <h3>Product 1</h3>
-          <p>Product description goes here.</p>
-          <button class="edit-btn">Edit</button>
-          <button>Remove</button>
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="sidebar">
+          <h2>Admin - Manage Products</h2>
+          <form id="add-product-form" class="admin-form">
+            <h3>Add New Product</h3>
+            <label
+              >Product Name: <input type="text" name="product-name" required
+            /></label>
+            <label
+              >Description: <textarea name="description" required></textarea>
+            </label>
+            <label>Price: <input type="number" name="price" required /></label>
+            <label
+              >Stock Amount: <input type="number" name="stock" required
+            /></label>
+            <label>Images: <input type="file" name="images" multiple /></label>
+            <button type="submit">Add Product</button>
+          </form>
         </div>
 
-        <!-- Example Product 2 -->
-        <div class="product-item">
-          <img src="https://via.placeholder.com/250x150" alt="Product 2" />
-          <h3>Product 2</h3>
-          <p>Product description goes here.</p>
-          <button class="edit-btn">Edit</button>
-          <button>Remove</button>
-        </div>
+        <div class="products-section">
+          <h2>Product List</h2>
+          <div class="products-grid">
+            <div class="product">
+              <img
+                src="../images/nvidia-rtx-3080.jpg"
+                alt="NVIDIA Geforce RTX 3080"
+              />
+              <p>NVIDIA Geforce RTX 3080</p>
+              <div class="admin-actions">
+                <a href="./edit_product.html" class="edit-btn">✏️ Edit</a>
+              </div>
+            </div>
 
-        <div class="product-item">
-          <img src="https://via.placeholder.com/250x150" alt="Product 3" />
-          <h3>Product 3</h3>
-          <p>Product description goes here.</p>
-          <button class="edit-btn">Edit</button>
-          <button>Remove</button>
+            <div class="product">
+              <img
+                src="../images/nvidia-rtx-4070ti.jpg"
+                alt="NVIDIA Geforce RTX 4070 TI"
+              />
+              <p>NVIDIA Geforce RTX 4070 TI</p>
+              <div class="admin-actions">
+                <a href="./edit_product.html" class="edit-btn">✏️ Edit</a>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="product-item">
-          <img src="https://via.placeholder.com/250x150" alt="Product 4" />
-          <h3>Product 4</h3>
-          <p>Product description goes here.</p>
-          <button class="edit-btn">Edit</button>
-          <button>Remove</button>
-        </div>
-
-        <!-- Add more products as needed -->
       </div>
     </div>
 
     <footer>
-      <p>&copy; 2025 eShop Admin. All rights reserved.</p>
+      <p>&copy; 2025 eShop. All rights reserved.</p>
       <p>Contact | Privacy Policy | Terms of Service</p>
     </footer>
   </body>
