@@ -1,3 +1,24 @@
+**Laravel Server - How to Start**
+Docs: https://laravel.com/docs/12.x
+
+1. Install PHP, Composer & Laravel:
+   `/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"`
+
+2. Build the app (might not be required)
+   `npm install && npm run build`
+
+3. Ensure Postgres is running on 127.0.0.1:5432 and ensure database _fiit_wtech_ is created, then run migrations:
+   `php artisan migrate`
+
+4. Start the server:
+   `composer run dev`
+
+Notes:
+HTML templates are in `/resources/views` (renamed to .blade.php), CSS is in `/resources/css`, images are in `/public/images`, DB config is in `.env`
+Dir structure: https://laravel.com/docs/12.x/structure
+
+See index.blade.php as an example of how to include CSS
+
 **Commits:**
 ![commits](./diagrams/commits.png)
 
