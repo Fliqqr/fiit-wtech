@@ -13,7 +13,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->words(3, true),
-            'image_url' => $this->faker->imageUrl(640, 480, 'tech', true),
+            'image_url' => 'http://localhost:8000/images/nvidia-rtx-4090.jpg',
             'description' => $this->faker->paragraph(4),
             'price' => $this->faker->randomFloat(2, 5, 500),
             'in_stock' => $this->faker->numberBetween(0, 500),
