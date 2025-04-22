@@ -4,17 +4,19 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Admin Panel - Products</title>
-        <link rel="stylesheet" href="./css/base.css" />
-        <link rel="stylesheet" href="./css/products.css" />
-        <link rel="stylesheet" href="./css/admin.css" />
-        <link rel="stylesheet" href="./css/header.css" />
-        <link rel="stylesheet" href="./css/footer.css" />
+        @vite([
+            'resources/css/admin.css', 
+            'resources/css/products.css', 
+            'resources/css/base.css',
+            'resources/css/header.css',
+            'resources/css/footer.css'
+        ])
     </head>
     <body>
         <header>
-            <a href="index.html" class="logo">eShop Admin</a>
+            <a href="/" class="logo">eShop Admin</a>
             <div class="navbar-actions">
-                <div class="account"><a href="logout.html">🔒 Logout</a></div>
+                <div class="account"><a href="logout">🔒 Logout</a></div>
             </div>
         </header>
 
@@ -50,7 +52,7 @@
                     <h2>Product List</h2>
                     <div class="products-grid">
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/nvidia-rtx-3080.jpg"
                                     alt="NVIDIA Geforce RTX 3080"
@@ -58,14 +60,14 @@
                                 <p>NVIDIA Geforce RTX 3080</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>
                         </div>
 
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/nvidia-rtx-4070ti.jpg"
                                     alt="NVIDIA Geforce RTX 4070 TI"
@@ -73,14 +75,14 @@
                                 <p>NVIDIA Geforce RTX 4070 TI</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>
                         </div>
 
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/nvidia-rtx-4090.jpg"
                                     alt="NVIDIA Geforce RTX 4090"
@@ -88,14 +90,14 @@
                                 <p>NVIDIA Geforce RTX 4090</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>
                         </div>
 
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/nvidia-rtx-5070ti.jpg"
                                     alt="NVIDIA Geforce RTX 5070 TI"
@@ -103,14 +105,14 @@
                                 <p>NVIDIA Geforce RTX 5070 TI</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>
                         </div>
 
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/amd-rx-7600.jpg"
                                     alt="AMD Radeon RX 7600 XT"
@@ -118,14 +120,14 @@
                                 <p>AMD Radeon RX 7600 XT</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>
                         </div>
 
                         <div class="product">
-                            <a href="./item.html">
+                            <a href="./item">
                                 <img
                                     src="../images/amd-rx-7600xt.jpg"
                                     alt="AMD Radeon RX 7600"
@@ -133,7 +135,7 @@
                                 <p>AMD Radeon RX 7600</p>
                             </a>
                             <div class="admin-actions">
-                                <a href="./edit_product.html" class="edit-btn"
+                                <a href="./edit_product" class="edit-btn"
                                     >✏️ Edit</a
                                 >
                             </div>

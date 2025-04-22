@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products - eShop</title>
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/products.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    @vite([
+        'resources/css/products.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">eShop</a>
+      <a href="/" class="logo">eShop</a>
       <div class="search-bar">
         <input type="text" placeholder="Search products..." />
         <button type="submit">🔍</button>
       </div>
       <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="cart"><a href="cart">🛒</a></div>
+        <div class="account"><a href="login">👤 Account</a></div>
       </div>
     </header>
 
@@ -64,7 +66,7 @@
           <h2>Products</h2>
           <div class="products-grid">
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/nvidia-rtx-3080.jpg"
                   alt="NVIDIA Geforce RTX 3080"
@@ -73,7 +75,7 @@
               </a>
             </div>
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/nvidia-rtx-4070ti.jpg"
                   alt="NVIDIA Geforce RTX 4070 TI"
@@ -83,7 +85,7 @@
             </div>
 
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/nvidia-rtx-4090.jpg"
                   alt="NVIDIA Geforce RTX 4090"
@@ -92,7 +94,7 @@
               </a>
             </div>
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/nvidia-rtx-5070ti.jpg"
                   alt="NVIDIA Geforce RTX 5070 TI"
@@ -101,7 +103,7 @@
               </a>
             </div>
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/amd-rx-7600.jpg"
                   alt="AMD Radeon RX 7600 XT"
@@ -110,7 +112,7 @@
               </a>
             </div>
             <div class="product">
-              <a href="./item.html">
+              <a href="./item">
                 <img
                   src="../images/amd-rx-7600xt.jpg"
                   alt="AMD Radeon RX 7600"

@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payment - eShop</title>
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/payment.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    @vite([
+        'resources/css/payment.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
 </head>
 <body>
 <header>
-    <a href="index.html" class="logo">eShop</a>
+    <a href="/" class="logo">eShop</a>
     <div class="search-bar">
         <input type="text" placeholder="Search products..." />
         <button type="submit">🔍</button>
     </div>
     <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="cart"><a href="cart">🛒</a></div>
+        <div class="account"><a href="login">👤 Account</a></div>
     </div>
 </header>
 
@@ -98,8 +100,8 @@
     </div>
 
     <div class="payment-actions">
-        <a href="delivery.html">Back to Delivery</a>
-        <button onclick="alert('Order confirmed! Thank you for shopping with eShop.'); window.location.href='index.html';">Confirm Order</button>
+        <a href="delivery">Back to Delivery</a>
+        <button onclick="alert('Order confirmed! Thank you for shopping with eShop.'); window.location.href='/';">Confirm Order</button>
     </div>
 </div>
 

@@ -13,28 +13,28 @@
     </head>
     <body>
         <header>
-            <a href="index.html" class="logo">eShop</a>
+            <a href="/" class="logo">eShop</a>
             <div class="search-bar">
                 <input type="text" placeholder="Search products..." />
                 <button type="submit">🔍</button>
             </div>
             <div class="navbar-actions">
-                <div class="cart"><a href="cart.html">🛒</a></div>
-                <div class="account"><a href="login.html">👤 Account</a></div>
+                <div class="cart"><a href="cart">🛒</a></div>
+                <div class="account"><a href="login">👤 Account</a></div>
             </div>
         </header>
 
         <div class="content-wrapper">
             <div class="main">
-                <a href="products.html" class="category">
+                <a href="products" class="category">
                     <img src="../images/pc.jpg" alt="Pre-built PCs" />
                     <span>Pre-built PCs</span>
                 </a>
-                <a href="products.html" class="category">
+                <a href="products" class="category">
                     <img src="../images/cpu.jpg" alt="PC Components" />
                     <span>PC Components</span>
                 </a>
-                <a href="products.html" class="category">
+                <a href="products" class="category">
                     <img src="../images/monitor.jpg" alt="Peripherals" />
                     <span>Peripherals</span>
                 </a>

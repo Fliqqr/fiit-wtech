@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart - eShop</title>
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/cart.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    @vite([
+        'resources/css/cart.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">eShop</a>
+      <a href="/" class="logo">eShop</a>
       <div class="search-bar">
         <input type="text" placeholder="Search products..." />
         <button type="submit">🔍</button>
       </div>
       <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="cart"><a href="cart">🛒</a></div>
+        <div class="account"><a href="login">👤 Account</a></div>
       </div>
     </header>
 
@@ -97,8 +99,8 @@
           <span>80 €</span>
         </div>
         <div class="cart-actions">
-          <a href="products.html">Back to product page</a>
-          <a href="delivery.html">Continue</a>
+          <a href="products">Back to product page</a>
+          <a href="delivery">Continue</a>
         </div>
       </div>
     </div>

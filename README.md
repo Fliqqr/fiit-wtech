@@ -9,9 +9,13 @@ Docs: https://laravel.com/docs/12.x
 
 3. Ensure Postgres is running on 127.0.0.1:5432 and ensure database _fiit_wtech_ is created, then run migrations:
    `php artisan migrate`
+   OR
+   `make db` to reset and seed the database
 
 4. Start the server:
    `composer run dev`
+
+**Or just use `make dev` to reset the DB and start the dev server.**
 
 Notes:
 HTML templates are in `/resources/views` (renamed to .blade.php), CSS is in `/resources/css`, images are in `/public/images`, DB config is in `.env`

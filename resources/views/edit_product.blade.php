@@ -3,18 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
-    <link rel="stylesheet" href="./css/edit.css" />
+    @vite([
+        'resources/css/edit.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
     <title>Edit Product - Admin Panel</title>
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">eShop Admin</a>
+      <a href="/" class="logo">eShop Admin</a>
       <div class="navbar-actions">
         <div class="account">
-          <a href="logout.html">👤 Logout</a>
+          <a href="logout">👤 Logout</a>
         </div>
       </div>
     </header>

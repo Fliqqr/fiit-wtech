@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - eShop</title>
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    @vite([
+        'resources/css/login.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">eShop</a>
+      <a href="/" class="logo">eShop</a>
       <div class="search-bar">
         <input type="text" placeholder="Search products..." />
         <button type="submit">🔍</button>
       </div>
       <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="cart"><a href="cart">🛒</a></div>
+        <div class="account"><a href="login">👤 Account</a></div>
       </div>
     </header>
 
@@ -31,7 +33,7 @@
           <button type="submit">Login</button>
         </form>
         <div class="login-links">
-          <a href="register.html">Register</a>
+          <a href="register">Register</a>
         </div>
       </div>
     </div>

@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delivery - eShop</title>
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/delivery.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    @vite([
+        'resources/css/delivery.css', 
+        'resources/css/base.css',
+        'resources/css/header.css',
+        'resources/css/footer.css'
+    ])
 </head>
 <body>
 <header>
-    <a href="index.html" class="logo">eShop</a>
+    <a href="/" class="logo">eShop</a>
     <div class="search-bar">
         <input type="text" placeholder="Search products..." />
         <button type="submit">🔍</button>
     </div>
     <div class="navbar-actions">
-        <div class="cart"><a href="cart.html">🛒</a></div>
-        <div class="account"><a href="login.html">👤 Account</a></div>
+        <div class="cart"><a href="cart">🛒</a></div>
+        <div class="account"><a href="login">👤 Account</a></div>
     </div>
 </header>
 
@@ -63,8 +65,8 @@
     </div>
 
     <div class="delivery-actions">
-        <a href="cart.html">Back to Cart</a>
-        <a href="payment.html">Continue</a>
+        <a href="cart">Back to Cart</a>
+        <a href="payment">Continue</a>
     </div>
 </div>
 
