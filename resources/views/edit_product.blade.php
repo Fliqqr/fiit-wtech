@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @vite([
-        'resources/css/edit.css', 
+        'resources/css/edit.css',
         'resources/css/base.css',
         'resources/css/header.css',
         'resources/css/footer.css'
@@ -13,10 +13,17 @@
   </head>
   <body>
     <header>
-      <a href="/" class="logo">eShop Admin</a>
+      <a href="{{route('home')}}" class="logo">eShop Admin</a>
       <div class="navbar-actions">
         <div class="account">
-          <a href="logout">👤 Logout</a>
+            <div class="account">
+                @auth
+                    <form method="POST" action="{{ route("logout") }}">
+                        @csrf
+                        <button type="submit">🔓 Logout</button>
+                    </form>
+                @endauth
+            </div>
         </div>
       </div>
     </header>

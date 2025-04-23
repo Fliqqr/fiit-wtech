@@ -4,11 +4,9 @@ header {
     align-items: center;
     background: var(--color-dark);
     padding: 15px;
-    color: var(--color-background);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
 }
 
 header .logo {
@@ -56,42 +54,36 @@ header .logo:hover {
     transition: background 0.3s;
 }
 
-.search-bar button:hover {
-    background: var(--color-accent);
-}
-
 .navbar-actions {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-header .account a {
+header button,
+header .cart a{
     color: var(--color-background);
     text-decoration: none;
 }
 
-header .account {
+header button,
+header .account a,
+header .cart{
+    all: unset;
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 8px;
+    color: var(--color-background);
     background: var(--color-primary);
     transition: background 0.3s;
 }
 
-header .account:hover,
-header .card a:hover{
+header button:hover,
+header .account a:hover,
+header .cart:hover{
     background: var(--color-accent);
 }
 
-header .cart a {
-    color: var(--color-background);
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 8px;
-    background: var(--color-primary);
-    transition: background 0.3s;
-}
 
 @media (max-width: 768px) {
     .search-bar {

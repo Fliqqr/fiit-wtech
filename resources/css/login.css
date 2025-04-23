@@ -60,6 +60,23 @@
     font-size: 14px;
 }
 
+.form-errors {
+    background-color: #ffe0e0;
+    color: #321a1a;
+    border: 1px solid #e08080;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+
+.form-errors ul {
+    list-style: none;
+}
+
+.form-errors li {
+    color: #952d2d;
+    padding: 4px 0;
+}
 
 @media (max-width: 768px) {
     .login-box {
