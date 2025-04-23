@@ -25,8 +25,31 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
+
+        $userId = Auth::id();
+        $sessionId = $request->session()->getId();
+
+        // Merge guest cart into user cart
+        $guestCartItems = \App\Models\InShoppingCart::where('session_id', $sessionId)->get();
+
+        \Log::info('SESSION ID BEFORE LOGIN: ' . $sessionId);
+        \Log::info('GUEST ITEMS FOUND: ' . $guestCartItems->count());
+        foreach ($guestCartItems as $guestItem) {
+            $existing = \App\Models\InShoppingCart::where('user_id', $userId)
+                ->where('product_id', $guestItem->product_id)
+                ->first();
+
+            if ($existing) {
+                $existing->amount += $guestItem->amount;
+                $existing->save();
+                $guestItem->delete();
+            } else {
+                $guestItem->user_id = $userId;
+                $guestItem->session_id = null;
+                $guestItem->save();
+            }
+        }
 
         return redirect()->route('home');
     }

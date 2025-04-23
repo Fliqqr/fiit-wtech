@@ -43,70 +43,44 @@
         <span>Payment</span>
       </div>
 
-      <div class="cart-items">
-        <div class="cart-item">
-          <div class="item-image">
-            <img src="../images/GPU.jpg" alt="GPU">
-          </div>
-          <div class="item-details">
-            <p>Nvidia Graphics card</p>
-            <div class="item-row">
-              <div class="quantity">
-                <button>-</button>
-                <span>2</span>
-                <button>+</button>
-              </div>
-              <div class="item-controls">
-                <div class="item-price">55 €</div>
-                <button class="remove-item">×</button>
-              </div>
-            </div>
-          </div>
+        <div class="cart-items">
+            @foreach ($cartItems as $item)
+                <div class="cart-item">
+                    <div class="item-image">
+                        <img src="{{ $item->product->image_url ?? '/images/placeholder.jpg' }}" alt="{{ $item->product->name }}">
+                    </div>
+                    <div class="item-details">
+                        <p>{{ $item->product->name }}</p>
+                        <div class="item-row">
+                            <div class="quantity">
+                                <form method="POST" action="{{ route('cart.update', $item->id) }}" style="display: flex; align-items: center;">
+                                    @csrf
+                                    <button type="submit" name="amount" value="{{ $item->amount - 1 }}" {{ $item->amount <= 1 ? 'disabled' : '' }}>-</button>
+                                    <span style="margin: 0 10px;">{{ $item->amount }}</span>
+                                    <button type="submit" name="amount" value="{{ $item->amount + 1 }}">+</button>
+                                </form>
+                            </div>
+                            <div class="item-controls">
+                                <div class="item-price">{{ number_format($item->product->price * $item->amount, 2) }} €</div>
+                                <form method="POST" action="{{ route('cart.remove', $item->id) }}">
+                                    @csrf
+                                    <button class="remove-item" type="submit">×</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+            @if ($cartItems->isEmpty())
+                <p>Your cart is empty.</p>
+            @endif
         </div>
-        <div class="cart-item">
-          <div class="item-image">
-            <img src="../images/Computer.jpg" alt="PC">
-          </div>
-          <div class="item-details">
-            <p>Pre-Built Gaming PC</p>
-            <div class="item-row">
-              <div class="quantity">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
-              </div>
-              <div class="item-controls">
-                <div class="item-price">5 €</div>
-                <button class="remove-item">×</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item">
-          <div class="item-image">
-            <img src="../images/Cpu2.jpg" alt="CPU">
-          </div>
-          <div class="item-details">
-            <p>CPU</p>
-            <div class="item-row">
-              <div class="quantity">
-                <button>-</button>
-                <span>3</span>
-                <button>+</button>
-              </div>
-              <div class="item-controls">
-                <div class="item-price">10 €</div>
-                <button class="remove-item">×</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="cart-footer">
         <div class="cart-total">
-          <span>Total</span>
-          <span>80 €</span>
+            <span>Total</span>
+            <span>{{number_format($cartItems->sum(fn($item) => $item->product->price * $item->amount), 2)}} €</span>
         </div>
         <div class="cart-actions">
           <a href="{{route('products.index')}}">Back to product page</a>

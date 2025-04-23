@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('in_shopping_cart', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->unsignedInteger('amount')->default(1);
+            $table->string('session_id')->nullable();
         });
     }
 

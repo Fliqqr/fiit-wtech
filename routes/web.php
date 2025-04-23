@@ -8,8 +8,10 @@ use App\Http\Controllers\CartController;
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/item', [ProductController::class, 'show'])->name('product.show');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::view('/cart', 'cart')->name('cart');
 Route::view('/', 'index')->name('home');
 Route::view('/admin', 'admin')->name('admin');
 Route::view('/delivery', 'delivery')->name('delivery');
