@@ -8,8 +8,29 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function show(Request $request)
+    {
+        $id = $request->query('id');
+        $product = Product::findOrFail($id);
+
+        return view('item', compact('product'));
+    }
+
     public function index(Request $request) {
         $query = Product::query();
+
+        // Fulltext Search
+        // if ($search = $request->input('search')) {
+        //     $tsQuery = implode(' & ', explode(' ', $search)); // convert to tsquery-safe format
+        //     $query->whereRaw(
+        //         "to_tsvector('english', name) @@ to_tsquery('english', ?)",
+        //         [$tsQuery]
+        //     );
+        // }
+
+        if ($search = $request->input('search')) {
+            $query->where('name', 'ILIKE', '%' . $search . '%');
+        }
 
         // Filters
         if ($request->has('brand') && $request->brand !== 'all') {

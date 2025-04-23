@@ -1,23 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'index')->name('home');
-Route::view('/cart', 'cart')->name('cart');
-Route::view('/admin', 'admin')->name('admin');
-Route::view('/edit_product', 'edit_product')->name('edit_product');
-Route::view('/item', 'item')->name('item');
-Route::view('/payment', 'payment')->name('payment');
-Route::view('/delivery', 'delivery')->name('delivery');
-Route::view('/services', 'services')->name('services');
-Route::view('/gallery', 'gallery')->name('gallery');
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
-// Route for products page
-Route::get('/products', function () {
-    $products = Product::paginate(6); //change pagination value to list different counts of products
-    return view('products', compact('products'));
-})->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/item', [ProductController::class, 'show'])->name('product.show');
+
+Route::view('/cart', 'cart')->name('cart');
+Route::view('/', 'index')->name('home');
+Route::view('/admin', 'admin')->name('admin');
+Route::view('/delivery', 'delivery')->name('delivery');
+Route::view('/edit-product', 'edit_product')->name('edit-product');
+Route::view('/login', 'login')->name('login');
+Route::view('/payment', 'payment')->name('payment');
+Route::view('/register', 'register')->name('register');
 
 require __DIR__.'/auth.php';
+
