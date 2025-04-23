@@ -11,6 +11,19 @@ class ProductController extends Controller
     public function index(Request $request) {
         $query = Product::query();
 
+        // Fulltext Search
+        // if ($search = $request->input('search')) {
+        //     $tsQuery = implode(' & ', explode(' ', $search)); // convert to tsquery-safe format
+        //     $query->whereRaw(
+        //         "to_tsvector('english', name) @@ to_tsquery('english', ?)",
+        //         [$tsQuery]
+        //     );
+        // }
+
+        if ($search = $request->input('search')) {
+            $query->where('name', 'ILIKE', '%' . $search . '%');
+        }
+
         // Filters
         if ($request->has('brand') && $request->brand !== 'all') {
             $query->where('brand', $request->brand);

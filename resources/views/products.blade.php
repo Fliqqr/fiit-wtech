@@ -9,24 +9,26 @@
 </head>
 
 <body>
-    <header>
-        <a href="/" class="logo">eShop</a>
-        <div class="search-bar">
-            <input type="text" placeholder="Search products..." />
-            <button type="submit">🔍</button>
-        </div>
-        <div class="navbar-actions">
-            <div class="cart"><a href="cart">🛒</a></div>
-            <div class="account"><a href="login">👤 Account</a></div>
-        </div>
-    </header>
+    <form method="GET" action="{{ route('products.index') }}">
 
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="sidebar">
-                <h3>Filters</h3>
+        <header>
+            <a href="/" class="logo">eShop</a>
+            <div class="search-bar">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
+                <button type="submit">🔍</button>
+            </div>
+            <div class="navbar-actions">
+                <div class="cart"><a href="cart">🛒</a></div>
+                <div class="account"><a href="login">👤 Account</a></div>
+            </div>
+        </header>
 
-                <form method="GET" action="{{ route('products.index') }}">
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="sidebar">
+                    <h3>Filters</h3>
+
+                    {{-- <form method="GET" action="{{ route('products.index') }}"> --}}
                     <label for="sort-select">Sort By:</label>
                     <select id="sort-select" name="sort">
                         <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low to
@@ -59,28 +61,30 @@
                     </select>
 
                     <button type="submit">Apply Filters</button>
-                </form>
-            </div>
-
-            <div class="products-section">
-                <h2>Products</h2>
-                <div class="products-grid">
-                    @foreach ($products as $product)
-                        <div class="product">
-                            <a href="{{ url('/item?id=' . $product->id) }}">
-                                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
-                                <p>{{ $product->name }}</p>
-                            </a>
-                        </div>
-                    @endforeach
+                    {{-- </form> --}}
                 </div>
 
-                <div class="pagination">
-                    {{ $products->links() }}
+                <div class="products-section">
+                    <h2>Products</h2>
+                    <div class="products-grid">
+                        @foreach ($products as $product)
+                            <div class="product">
+                                <a href="{{ url('/item?id=' . $product->id) }}">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
+                                    <p>{{ $product->name }}</p>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="pagination">
+                        {{ $products->links() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </form>
 
     <footer>
         <p>&copy; 2025 eShop. All rights reserved.</p>

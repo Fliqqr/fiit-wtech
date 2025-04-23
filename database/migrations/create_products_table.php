@@ -20,6 +20,8 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->unsignedInteger('in_stock');
         });
+
+        DB::statement("CREATE INDEX products_name_fulltext_idx ON products USING GIN (to_tsvector('english', name))");
     }
 
     /**
@@ -27,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement("DROP INDEX IF EXISTS products_name_fulltext_idx");
         Schema::dropIfExists('products');
     }
 };
