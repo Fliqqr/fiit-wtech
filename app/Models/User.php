@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    static function default(): User {
+        return User::where('name', 'Test User')->firstOrFail();
+    }
 }

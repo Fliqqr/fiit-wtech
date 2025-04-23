@@ -36,6 +36,6 @@ class DatabaseSeeder extends Seeder
             );
         });
 
-        InShoppingCart::factory()->count(30)->create();
+        // InShoppingCart::factory()->count(30)->create();
     }
 }

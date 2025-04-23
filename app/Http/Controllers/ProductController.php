@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function show(Request $request)
+    {
+        $id = $request->query('id');
+        $product = Product::findOrFail($id);
+
+        return view('item', compact('product'));
+    }
+
     public function index(Request $request) {
         $query = Product::query();
 
