@@ -12,8 +12,8 @@
     <header>
         <a href="{{ route('home') }}" class="logo">eShop</a>
         <div class="search-bar">
-            <input type="text" placeholder="Search products..." />
-            <button type="submit">🔍</button>
+            <input type="text" id="search-input" placeholder="Search products..." value="{{ request('search') }}">
+            <button onclick="applyFilters()">🔍</button>
         </div>
         <div class="navbar-actions">
             <div class="cart"><a href="{{ route('cart') }}">🛒</a></div>
@@ -36,7 +36,9 @@
             <div class="sidebar">
                 <h3>Filters</h3>
 
-                <form method="GET" action="{{ route('products.index') }}">
+                <form id="filters-form" method="GET" action="{{ route('products.index') }}">
+                    <input type="hidden" name="search" id="search-hidden" value="{{ request('search') }}">
+
                     <label for="sort-select">Sort By:</label>
                     <select id="sort-select" name="sort">
                         <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low to
@@ -99,6 +101,17 @@
         <p>&copy; 2025 eShop. All rights reserved.</p>
         <p>Contact | Privacy Policy | Terms of Service</p>
     </footer>
+
+    <script>
+        // When user presses Enter in the search bar, submit the filters form
+        document.getElementById('search-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent default form submission if it's inside a <form>
+                document.getElementById('search-hidden').value = this.value;
+                document.getElementById('filters-form').submit();
+            }
+        });
+    </script>
 </body>
 
 </html>
