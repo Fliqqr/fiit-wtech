@@ -10,19 +10,19 @@
 
 <body>
     <header>
-        <a href="{{route('home')}}" class="logo">eShop</a>
+        <a href="{{ route('home') }}" class="logo">eShop</a>
         <div class="search-bar">
             <input type="text" placeholder="Search products..." />
             <button type="submit">🔍</button>
         </div>
         <div class="navbar-actions">
-            <div class="cart"><a href="{{route('cart')}}">🛒</a></div>
+            <div class="cart"><a href="{{ route('cart') }}">🛒</a></div>
             <div class="account">
                 @guest
-                    <a href="{{ route('login')}}">👤 Account</a>
+                    <a href="{{ route('login') }}">👤 Account</a>
                 @endguest
                 @auth
-                    <form method="POST" action="{{ route("logout") }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit">🔓 Logout</button>
                     </form>
@@ -31,12 +31,12 @@
         </div>
     </header>
 
-        <div class="content-wrapper">
-            <div class="container">
-                <div class="sidebar">
-                    <h3>Filters</h3>
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="sidebar">
+                <h3>Filters</h3>
 
-                    {{-- <form method="GET" action="{{ route('products.index') }}"> --}}
+                <form method="GET" action="{{ route('products.index') }}">
                     <label for="sort-select">Sort By:</label>
                     <select id="sort-select" name="sort">
                         <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low to
@@ -60,37 +60,40 @@
                     <label><input type="checkbox" name="on_sale" {{ request('on_sale') ? 'checked' : '' }} /> On
                         Sale</label><br />
 
-                    <label for="brand-select">Brand:</label>
+                    <label for="brand-select">Category:</label>
                     <select id="brand-select" name="brand">
-                        <option value="all">All Brands</option>
-                        <option value="nvidia" {{ request('brand') == 'nvidia' ? 'selected' : '' }}>NVIDIA</option>
-                        <option value="amd" {{ request('brand') == 'amd' ? 'selected' : '' }}>AMD</option>
-                        <option value="intel" {{ request('brand') == 'intel' ? 'selected' : '' }}>Intel</option>
+                        <option value="all">All Categories</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}"
+                                {{ request('brand') == $category->name ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
                     </select>
 
                     <button type="submit">Apply Filters</button>
-                    {{-- </form> --}}
+                </form>
+            </div>
+
+            <div class="products-section">
+                <h2>Products</h2>
+                <div class="products-grid">
+                    @foreach ($products as $product)
+                        <div class="product">
+                            <a href="{{ url('/item?id=' . $product->id) }}">
+                                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
+                                <p>{{ $product->name }}</p>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
 
-                <div class="products-section">
-                    <h2>Products</h2>
-                    <div class="products-grid">
-                        @foreach ($products as $product)
-                            <div class="product">
-                                <a href="{{ url('/item?id=' . $product->id) }}">
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
-                                    <p>{{ $product->name }}</p>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="pagination">
-                        {{ $products->links() }}
-                    </div>
+                <div class="pagination">
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 eShop. All rights reserved.</p>
