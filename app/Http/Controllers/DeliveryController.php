@@ -36,13 +36,17 @@ class DeliveryController extends Controller
                 'city' => $validated['city'],
                 'postal_code' => $validated['postal_code'],
                 'country' => $validated['country'],
-                'password' => Hash::make(Str::random(16)), // guest account
+                'password' => Hash::make(Str::random(16)),
                 'email_verified_at' => null,
             ]);
 
             session(['temp_user_id' => $user->id]);
         }
 
-        return redirect()->route('payment'); // to your payment page
+        $request->session()->put('delivery', $request->input('delivery'));
+
+
+
+        return redirect()->route('payment');
     }
 }

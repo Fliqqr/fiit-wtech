@@ -48,70 +48,67 @@
             <h2>Order Summary</h2>
             <div class="cart-summary">
                 <h3>Items</h3>
-                <div class="cart-item">
-                    <span>Product name 1</span>
-                    <span>55 €</span>
-                </div>
-                <div class="cart-item">
-                    <span>Product name 2</span>
-                    <span>10 €</span>
-                </div>
-                <div class="cart-item">
-                    <span>Product name 3</span>
-                    <span>5 €</span>
-                </div>
+                @foreach ($cartItems as $item)
+                    <div class="cart-item">
+                        <span>{{ $item->amount }}x {{ $item->product->name }}</span>
+                        <span>{{ number_format($item->product->price * $item->amount, 2) }} €</span>
+                    </div>
+                @endforeach
             </div>
             <div class="delivery-summary">
                 <h3>Delivery Address</h3>
-                <div class="delivery-item">Pavol Mrkva</div>
-                <div class="delivery-item">Hlavna 2</div>
-                <div class="delivery-item">Bratislava, 821 06</div>
-                <div class="delivery-item">Slovakia</div>
+                <div class="delivery-item">{{ $user->full_name }}</div>
+                <div class="delivery-item">{{ $user->address }}</div>
+                <div class="delivery-item">{{ $user->city }}, {{ $user->postal_code }}</div>
+                <div class="delivery-item">{{ $user->country }}</div>
             </div>
             <div class="total-summary">
                 <h3>Total</h3>
                 <div class="total-item">
                     <span>Subtotal</span>
-                    <span>70 €</span>
+                    <span>{{ number_format($subtotal, 2) }} €</span>
                 </div>
                 <div class="total-item">
-                    <span>Delivery (Home Delivery)</span>
-                    <span>5 €</span>
+                    <span>Delivery ({{ ucfirst($delivery) }})</span>
+                    <span>{{ number_format($deliveryPrice, 2) }} €</span>
                 </div>
                 <div class="total-item sum">
                     <span>Total</span>
-                    <span>75 €</span>
+                    <span>{{ number_format($total, 2) }} €</span>
                 </div>
             </div>
         </div>
 
         <div class="payment-panel">
             <h2>Payment Method</h2>
-            <form class="payment-form">
-                <div class="payment-options">
-                    <label>
-                        <input type="radio" name="payment" value="credit-card" required />
-                        Credit Card
-                    </label>
-                    <label>
-                        <input type="radio" name="payment" value="paypal" />
-                        PayPal
-                    </label>
-                    <label>
-                        <input type="radio" name="payment" value="bank-transfer" />
-                        Bank Transfer
-                    </label>
-                </div>
-                <div class="payment-details">
-                    <p>Please select a payment method to proceed.</p>
-                </div>
-            </form>
+            <div class="payment-options">
+                <label>
+                    <input type="radio" name="payment" value="credit-card" required />
+                    Credit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment" value="paypal" />
+                    PayPal
+                </label>
+                <label>
+                    <input type="radio" name="payment" value="bank-transfer" />
+                    Bank Transfer
+                </label>
+            </div>
         </div>
     </div>
 
-    <div class="payment-actions">
-        <a href="{{route('delivery')}}">Back to Delivery</a>
-        <button onclick="alert('Order confirmed! Thank you for shopping with eShop.'); window.location.href='/';">Confirm Order</button>
+    <div class="payment-footer">
+        <div class="confirm-check">
+            <label>
+                <input type="checkbox" id="confirmCheckbox" />
+                I confirm my personal and order information is correct.
+            </label>
+        </div>
+        <div class="payment-actions">
+            <a href="{{ route('delivery') }}">Back to Delivery</a>
+            <button type="button" id="confirmButton" disabled>Confirm Order</button>
+        </div>
     </div>
 </div>
 
@@ -119,5 +116,25 @@
     <p>&copy; 2025 eShop. All rights reserved.</p>
     <p>Contact | Privacy Policy | Terms of Service</p>
 </footer>
+
+<script>
+    const checkbox = document.getElementById('confirmCheckbox');
+    const button = document.getElementById('confirmButton');
+
+    checkbox.addEventListener('change', () => {
+        button.disabled = !checkbox.checked;
+    });
+
+    button.addEventListener('click', () => {
+        if (!checkbox.checked) {
+            alert("⚠️ Please confirm your information before placing the order.");
+            return;
+        }
+
+        alert("✅ Order confirmed! Thank you for shopping with eShop.");
+        window.location.href = "{{ route('cart.confirm') }}";
+    });
+</script>
+
 </body>
 </html>

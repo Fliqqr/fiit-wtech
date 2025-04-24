@@ -45,6 +45,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     static function default(): User {
         return User::where('name', 'Test User')->firstOrFail();
     }
