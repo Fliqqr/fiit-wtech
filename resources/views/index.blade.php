@@ -33,7 +33,6 @@
                 </div>
             </div>
         </header>
-
         <div class="content-wrapper">
             <div class="main">
                 <a href="{{route('products.index')}}" class="category">

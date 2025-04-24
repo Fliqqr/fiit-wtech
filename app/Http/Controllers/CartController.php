@@ -74,4 +74,15 @@ class CartController extends Controller
         $item->delete();
         return redirect()->back()->with('success', 'Item removed');
     }
+
+    public function confirmOrder()
+    {
+        if (Auth::check()) {
+            InShoppingCart::where('user_id', Auth::id())->delete();
+        } else {
+            InShoppingCart::where('session_id', session()->getId())->delete();
+        }
+
+        return redirect()->route('home');
+    }
 }

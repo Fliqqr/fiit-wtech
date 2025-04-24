@@ -119,6 +119,38 @@
     color: var(--color-background);
 }
 
+.payment-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.payment-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.payment-actions button,
+.payment-actions a {
+    padding: 12px 20px;
+    background: var(--color-primary);
+    color: var(--color-background);
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.payment-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
     .payment-content {
         flex-direction: column;

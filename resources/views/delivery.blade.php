@@ -53,18 +53,18 @@
                 @endforeach
             </ul>
         @endif
-
         <div class="delivery-content">
             <div class="address-panel">
                 <h2>Shipping Address</h2>
+                <div class="address-fields">
+                    <input type="text" name="full_name" placeholder="Full Name" value="{{ old('full_name') }}">
+                    <input type="text" name="address" placeholder="Address" value="{{ old('address') }}">
+                    <input type="text" name="city" placeholder="City" value="{{ old('city') }}">
+                    <input type="text" name="postal_code" placeholder="Postal Code" value="{{ old('postal_code') }}">
+                    <input type="text" name="country" placeholder="Country" value="{{ old('country') }}">
 
-                <input type="text" name="full_name" placeholder="Full Name" value="{{ old('full_name') }}">
-                <input type="text" name="address" placeholder="Address" value="{{ old('address') }}">
-                <input type="text" name="city" placeholder="City" value="{{ old('city') }}">
-                <input type="text" name="postal_code" placeholder="Postal Code" value="{{ old('postal_code') }}">
-                <input type="text" name="country" placeholder="Country" value="{{ old('country') }}">
+                </div>
             </div>
-
             <div class="options-panel">
                 <h2>Delivery Options</h2>
                 <div class="delivery-options">

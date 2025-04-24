@@ -84,7 +84,7 @@
         </div>
         <div class="cart-actions">
           <a href="{{route('products.index')}}">Back to product page</a>
-          <a href="{{route('delivery')}}">Continue</a>
+          <a href="{{route('delivery')}}" id="continueButton">Continue</a>
         </div>
       </div>
     </div>
@@ -93,5 +93,16 @@
       <p>&copy; 2025 eShop. All rights reserved.</p>
       <p>Contact | Privacy Policy | Terms of Service</p>
     </footer>
+    <script>
+        const cartItems = {{ $cartItems->count() }};
+        const continueButton = document.getElementById('continueButton');
+
+        if (cartItems === 0 && continueButton) {
+            continueButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert("🛒 Your cart is empty. Please add items before continuing to delivery.");
+            });
+        }
+    </script>
   </body>
 </html>
