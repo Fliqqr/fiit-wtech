@@ -76,10 +76,11 @@
 .delivery-actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: auto;
+    padding-top: 10px;
 }
 
-.delivery-actions a {
+.delivery-actions button{
     padding: 12px 20px;
     text-decoration: none;
     color: var(--color-background);
@@ -89,11 +90,37 @@
     transition: background 0.2s;
     cursor: pointer;
     border: none;
+    font-size: 16px;
 }
 
-.delivery-actions a:hover{
+.delivery-actions button:hover{
     background: var(--color-accent);
     color: var(--color-background);
+}
+
+form#delivery_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.form-errors {
+    background-color: #ffe0e0;
+    color: #321a1a;
+    border: 1px solid #e08080;
+    border-radius: 8px;
+    padding: 10px 50px;
+    font-size: 16px;
+}
+
+.form-errors ul {
+    list-style: none;
+}
+
+.form-errors li {
+    color: #952d2d;
+    padding: 4px 0;
 }
 
 @media (max-width: 768px) {
@@ -115,7 +142,6 @@
         gap: 10px;
     }
 
-    .delivery-actions a,
     .delivery-actions button {
         width: 100%;
         text-align: center;

@@ -43,41 +43,52 @@
         <span>Payment</span>
     </div>
 
-    <div class="delivery-content">
-        <div class="address-panel">
-            <h2>Shipping Address</h2>
-            <form>
-                <input type="text" placeholder="Full Name" required />
-                <input type="text" placeholder="Street Address" required />
-                <input type="text" placeholder="City" required />
-                <input type="text" placeholder="Postal Code" required />
-                <input type="text" placeholder="Country" required />
-            </form>
-        </div>
+    <form method="POST" action="{{ route('delivery.submit') }}" id="delivery_form">
+        @csrf
 
-        <div class="options-panel">
-            <h2>Delivery Options</h2>
-            <div class="delivery-options">
-                <label>
-                    <input type="radio" name="delivery" value="pickup" required />
-                    Pickup in Shop (Free)
-                </label>
-                <label>
-                    <input type="radio" name="delivery" value="home" />
-                    Home Delivery (€5)
-                </label>
-                <label>
-                    <input type="radio" name="delivery" value="express" />
-                    Express Delivery (€10)
-                </label>
+        @if ($errors->any())
+            <ul class="form-errors">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        <div class="delivery-content">
+            <div class="address-panel">
+                <h2>Shipping Address</h2>
+
+                <input type="text" name="full_name" placeholder="Full Name" value="{{ old('full_name') }}">
+                <input type="text" name="address" placeholder="Address" value="{{ old('address') }}">
+                <input type="text" name="city" placeholder="City" value="{{ old('city') }}">
+                <input type="text" name="postal_code" placeholder="Postal Code" value="{{ old('postal_code') }}">
+                <input type="text" name="country" placeholder="Country" value="{{ old('country') }}">
+            </div>
+
+            <div class="options-panel">
+                <h2>Delivery Options</h2>
+                <div class="delivery-options">
+                    <label>
+                        <input type="radio" name="delivery" value="pickup" {{ old('delivery') === 'pickup' ? 'checked' : '' }} required>
+                        Pickup in Shop (Free)
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery" value="home" {{ old('delivery') === 'home' ? 'checked' : '' }}>
+                        Home Delivery (€5)
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery" value="express" {{ old('delivery') === 'express' ? 'checked' : '' }}>
+                        Express Delivery (€10)
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="delivery-actions">
-        <a href="{{route('cart')}}">Back to Cart</a>
-        <a href="{{route('payment')}}">Continue</a>
-    </div>
+        <div class="delivery-actions">
+            <button type="button" onclick="window.location='{{ route('cart') }}'">Back to Cart</button>
+            <button type="submit">Continue</button>
+        </div>
+    </form>
 </div>
 
 <footer>

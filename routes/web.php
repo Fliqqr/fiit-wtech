@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DeliveryController;
+
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
@@ -11,6 +13,7 @@ Route::get('/item', [ProductController::class, 'show'])->name('product.show');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/delivery/submit', [DeliveryController::class, 'store'])->name('delivery.submit');
 
 Route::view('/', 'index')->name('home');
 Route::view('/admin', 'admin')->name('admin');

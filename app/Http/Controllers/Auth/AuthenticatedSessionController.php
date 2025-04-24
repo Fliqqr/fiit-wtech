@@ -16,6 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        session()->put('guest_cart_session_id', session()->getId());
         return view('auth.login');
     }
 
@@ -24,17 +25,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $guestSessionId = session()->pull('guest_cart_session_id');
+
         $request->authenticate();
         $request->session()->regenerate();
 
         $userId = Auth::id();
-        $sessionId = $request->session()->getId();
 
         // Merge guest cart into user cart
-        $guestCartItems = \App\Models\InShoppingCart::where('session_id', $sessionId)->get();
+        $guestCartItems = \App\Models\InShoppingCart::where('session_id', $guestSessionId)->get();
 
-        \Log::info('SESSION ID BEFORE LOGIN: ' . $sessionId);
-        \Log::info('GUEST ITEMS FOUND: ' . $guestCartItems->count());
         foreach ($guestCartItems as $guestItem) {
             $existing = \App\Models\InShoppingCart::where('user_id', $userId)
                 ->where('product_id', $guestItem->product_id)
