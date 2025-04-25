@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @vite(['resources/css/item.css', 'resources/css/base.css', 'resources/css/header.css', 'resources/css/footer.css'])
@@ -9,38 +10,62 @@
 
 <body>
     <header>
-      <a href="{{route('home')}}" class="logo">eShop</a>
-      <div class="search-bar">
-        <input type="text" placeholder="Search products..." />
-        <button type="submit">🔍</button>
-      </div>
-      <div class="navbar-actions">
-        <div class="cart"><a href="{{route('cart')}}">🛒</a></div>
-          <div class="account">
-              @guest
-                  <a href="{{ route('login')}}">👤 Account</a>
-              @endguest
-              @auth
-                  <form method="POST" action="{{ route("logout") }}">
-                      @csrf
-                      <button type="submit">🔓 Logout</button>
-                  </form>
-              @endauth
-          </div>
-      </div>
+        <a href="{{ route('home') }}" class="logo">eShop</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products..." />
+            <button type="submit">🔍</button>
+        </div>
+        <div class="navbar-actions">
+            <div class="cart"><a href="{{ route('cart') }}">🛒</a></div>
+            <div class="account">
+                @guest
+                    <a href="{{ route('login') }}">👤 Account</a>
+                @endguest
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">🔓 Logout</button>
+                    </form>
+                @endauth
+            </div>
+        </div>
     </header>
 
     <div class="content-wrapper">
         <div class="product-view">
             <div class="product-gallery">
-                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="main-image" />
+                <img id="mainImage" src="{{ $product->image_url }}" alt="{{ $product->name }}" class="main-image" />
+
+                @if (!empty($product->additional_images))
+                    <div class="thumbnail-container">
+                        <!-- Include the original image as the first thumbnail -->
+                        <img src="{{ $product->image_url }}" alt="Main image for {{ $product->name }}" class="thumbnail"
+                            onclick="document.getElementById('mainImage').src='{{ $product->image_url }}'" />
+
+                        <!-- Loop through additional images -->
+                        @foreach ($product->additional_images as $image)
+                            <img src="{{ $image }}" alt="Additional image for {{ $product->name }}"
+                                class="thumbnail"
+                                onclick="document.getElementById('mainImage').src='{{ $image }}'" />
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <div class="product-details">
                 <h1>{{ $product->name }}</h1>
-                <p class="price">${{ number_format($product->price, 2) }}</p>
+                <p class="price">{{ number_format($product->price, 2) }}€</p>
                 <p class="stock">Stock left: <span class="stock-count">{{ $product->in_stock }}</span></p>
                 <p class="description">{{ $product->description }}</p>
+
+                <div class="product-categories">
+                    <h2>Categories</h2>
+                    <ul>
+                        @foreach ($categories as $category)
+                            <li>{{ $category->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
 
                 {{-- Placeholder for technical specs --}}
                 <div class="technical-details">

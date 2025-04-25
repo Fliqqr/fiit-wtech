@@ -10,6 +10,7 @@ class ProductCategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->words(2, true),
+            'category_type' => $this->faker->randomElement(['Brand', 'Model', 'Component']),
         ];
     }
 }

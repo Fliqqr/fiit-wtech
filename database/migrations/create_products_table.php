@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('image_url');
+            $table->json('additional_images')->nullable();
             $table->longText('description');
             $table->float('price');
             $table->timestamp('created_at')->useCurrent();

@@ -13,8 +13,9 @@ class ProductController extends Controller
     {
         $id = $request->query('id');
         $product = Product::findOrFail($id);
+        $categories = $product->categories;
 
-        return view('item', compact('product'));
+        return view('item', compact('product', 'categories'));
     }
 
     public function index(Request $request)
@@ -26,10 +27,27 @@ class ProductController extends Controller
             $query->where('name', 'ILIKE', '%' . $search . '%');
         }
 
-        // Category (brand) filter
-        if ($request->filled('brand') && $request->brand !== 'all') {
+        // Filter by Component
+        if ($request->filled('Component') && $request->input('Component') !== 'all') {
             $query->whereHas('categories', function ($q) use ($request) {
-                $q->where('name', $request->brand);
+                $q->where('category_type', 'Component')
+                ->where('name', $request->input('Component'));
+            });
+        }
+
+        // Filter by Model
+        if ($request->filled('Model') && $request->input('Model') !== 'all') {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('category_type', 'Model')
+                ->where('name', $request->input('Model'));
+            });
+        }
+
+        // Filter by Brand
+        if ($request->filled('Brand') && $request->input('Brand') !== 'all') {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('category_type', 'Brand')
+                ->where('name', $request->input('Brand'));
             });
         }
 
@@ -66,7 +84,7 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate(12)->appends($request->query());
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::getCategoriesAsMap();
 
         return view('products', compact('products', 'categories'));
     }

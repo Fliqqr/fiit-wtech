@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products - eShop</title>
     @vite(['resources/css/products.css', 'resources/css/base.css', 'resources/css/header.css', 'resources/css/footer.css'])
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -32,7 +33,7 @@
     </header>
 
     <div class="content-wrapper">
-        <div class="container">
+        <div class="container-wrapper">
             <div class="sidebar">
                 <h3>Filters</h3>
 
@@ -59,19 +60,19 @@
 
                     <label><input type="checkbox" name="in_stock" {{ request('in_stock') ? 'checked' : '' }} /> In
                         Stock</label><br />
-                    <label><input type="checkbox" name="on_sale" {{ request('on_sale') ? 'checked' : '' }} /> On
-                        Sale</label><br />
 
-                    <label for="brand-select">Category:</label>
-                    <select id="brand-select" name="brand">
-                        <option value="all">All Categories</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->name }}"
-                                {{ request('brand') == $category->name ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    @foreach ($categories as $categoryType => $categoryGroup)
+                        <label for="category-{{ $categoryType }}">{{ ucfirst($categoryType) }}</label>
+                        <select id="category-{{ $categoryType }}" name="{{ $categoryType }}">
+                            <option value="all">All {{ ucfirst($categoryType) }}</option>
+                            @foreach ($categoryGroup as $category)
+                                <option value="{{ $category }}"
+                                    {{ request($categoryType) == $category ? 'selected' : '' }}>
+                                    {{ $category }}
+                                </option>
+                            @endforeach
+                        </select>
+                    @endforeach
 
                     <button type="submit">Apply Filters</button>
                 </form>
@@ -85,6 +86,7 @@
                             <a href="{{ url('/item?id=' . $product->id) }}">
                                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
                                 <p>{{ $product->name }}</p>
+                                <p>{{ $product->price }}€</p>
                             </a>
                         </div>
                     @endforeach
