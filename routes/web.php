@@ -21,9 +21,12 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::view('/admin', 'admin')->name('admin');
+Route::get('/admin', [ProductController::class, 'admin'])->name('admin.index');
+Route::get('/edit-product', [ProductController::class, 'edit'])->name('edit-product');
+Route::post('/edit-product', [ProductController::class, 'update'])->name('product.update');
+Route::post('/item-new', [ProductController::class, 'new_item'])->name('product.new');
+
 Route::view('/delivery', 'delivery')->name('delivery');
-Route::view('/edit-product', 'edit_product')->name('edit-product');
 Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
 

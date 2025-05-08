@@ -1,121 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @vite([
-        'resources/css/edit.css',
-        'resources/css/base.css',
-        'resources/css/header.css',
-        'resources/css/footer.css'
-    ])
+    @vite(['resources/css/edit.css', 'resources/css/base.css', 'resources/css/header.css', 'resources/css/footer.css'])
     <title>Edit Product - Admin Panel</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
-      <a href="{{route('home')}}" class="logo">eShop Admin</a>
-      <div class="navbar-actions">
-        <div class="account">
+        <a href="{{ route('home') }}" class="logo">eShop Admin</a>
+        <div class="navbar-actions">
             <div class="account">
                 @auth
-                    <form method="POST" action="{{ route("logout") }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit">🔓 Logout</button>
                     </form>
                 @endauth
             </div>
         </div>
-      </div>
     </header>
 
     <div class="content-wrapper">
-      <form class="product-edit-form" action="/save_product" method="POST">
-        <div class="product-view">
-          <div class="product-gallery">
-            <label for="main-image">Main Image URL:</label>
-            <input
-              type="text"
-              id="main-image"
-              name="main_image"
-              value="../images/nvidia-rtx-4090.jpg"
-            />
+        <form class="product-edit-form" action="{{ route('product.update', $product->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="product-view">
+                <div class="product-gallery">
+                    <label for="main-image">Main Image URL:</label>
+                    <input type="text" id="main-image" name="main_image"
+                        value="{{ old('main_image', $product->image_url) }}" />
 
-            <div class="thumbnail-container">
-              <label for="thumbnail1">Thumbnail 1 URL:</label>
-              <input
-                type="text"
-                id="thumbnail1"
-                name="thumbnail1"
-                value="../images/nvidia-rtx-4070ti.jpg"
-              />
-              <label for="thumbnail2">Thumbnail 2 URL:</label>
-              <input
-                type="text"
-                id="thumbnail2"
-                name="thumbnail2"
-                value="../images/nvidia-rtx-3080.jpg"
-              />
-            </div>
-          </div>
+                    <div class="thumbnail-container">
+                        @foreach ($product->additional_images ?? [] as $i => $thumb)
+                            <label for="thumbnail{{ $i + 1 }}">Thumbnail {{ $i + 1 }} URL:</label>
+                            <input type="text" id="thumbnail{{ $i + 1 }}" name="thumbnails[]"
+                                value="{{ $thumb }}" />
+                        @endforeach
+                    </div>
+                </div>
 
-          <div class="product-details">
-            <label for="product-name">Product Name:</label>
-            <input
-              type="text"
-              id="product-name"
-              name="product_name"
-              value="NVIDIA GeForce RTX 4090"
-            />
+                <div class="product-details">
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="product-name" name="product_name"
+                        value="{{ old('product_name', $product->name) }}" />
 
-            <label for="price">Price:</label>
-            <input type="text" id="price" name="price" value="$1,599.99" />
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price"
+                        value="{{ old('price', number_format($product->price, 2)) }}" />
 
-            <label for="stock">Stock Count:</label>
-            <input type="number" id="stock" name="stock" value="15" min="0" />
+                    <label for="stock">Stock Count:</label>
+                    <input type="number" id="stock" name="stock" value="{{ old('stock', $product->in_stock) }}"
+                        min="0" />
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="5">
-                Experience unparalleled gaming and rendering performance with the NVIDIA GeForce RTX 4090. Built with the latest Ada Lovelace architecture, it features 24GB GDDR6X memory, 16,384 CUDA cores, and advanced ray-tracing capabilities for an immersive experience.
-                        </textarea
-            >
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="5">{{ old('description', $product->description) }}</textarea>
 
-            <div class="technical-details">
-              <h2>Technical Specifications</h2>
-              <label for="specifications">Specifications (one per line):</label>
-              <textarea id="specifications" name="specifications" rows="10">
-                GPU Architecture: Ada Lovelace
-                Memory: 24GB GDDR6X
-                CUDA Cores: 16,384
-                Boost Clock: 2.52 GHz
-                Ray Tracing Cores: 3rd Generation
-                DLSS: 3.0
-                Power Consumption: 450W
-                Recommended PSU: 850W
-                Outputs: HDMI 2.1, DisplayPort 1.4a
-                            </textarea
-              >
+                    <div class="technical-details">
+                        <h2>Technical Specifications</h2>
+                        <label for="specifications">Specifications (one per line):</label>
+                        <textarea id="specifications" name="specifications" rows="10">{{ old('specifications', is_array($product->specifications) ? implode("\n", $product->specifications) : $product->specifications) }}</textarea>
+                    </div>
+
+                    <div class="add-to-cart-section">
+                        <label for="default-quantity">Default Quantity:</label>
+                        <input type="number" id="default-quantity" name="default_quantity"
+                            value="{{ old('default_quantity', $product->default_quantity ?? 1) }}" min="1" />
+                    </div>
+                </div>
             </div>
 
-            <div class="add-to-cart-section">
-              <label for="default-quantity">Default Quantity:</label>
-              <input
-                type="number"
-                id="default-quantity"
-                name="default_quantity"
-                value="1"
-                min="1"
-              />
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="save-button">Save Changes</button>
-      </form>
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
     </div>
 
     <footer>
-      <p>&copy; 2025 eShop. All rights reserved.</p>
-      <p>Contact | Privacy Policy | Terms of Service</p>
+        <p>&copy; 2025 eShop. All rights reserved.</p>
+        <p>Contact | Privacy Policy | Terms of Service</p>
     </footer>
-  </body>
+</body>
+
 </html>
