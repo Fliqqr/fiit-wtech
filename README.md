@@ -6,6 +6,9 @@ Docs: https://laravel.com/docs/12.x
 
 2. Build the app (might not be required)
    `npm install && npm run build`
+   `composer install`
+   `composer global require laravel/installer`
+   `php artisan key:generate`
 
 3. Ensure Postgres is running on 127.0.0.1:5432 and ensure database _fiit_wtech_ is created, then run migrations:
    `php artisan migrate`

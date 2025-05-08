@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('in_stock');
         });
 
-        DB::statement("CREATE INDEX products_name_fulltext_idx ON products USING GIN (to_tsvector('english', name))");
+        // DB::statement("CREATE INDEX products_name_fulltext_idx ON products USING GIN (to_tsvector('english', name))");
     }
 
     /**

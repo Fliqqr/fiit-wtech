@@ -52,14 +52,28 @@
                         </option>
                     </select>
 
-                    <label for="price-range">Max Price: <span
-                            id="price-value">{{ request('max_price', 100) }}</span></label>
-                    <input type="range" id="price-range" name="max_price" min="0" max="1000"
+                    <label for="price-min">
+                        Min Price: <span id="price-value">{{ request('min_price', 0) }}</span>
+                    </label>
+                    <input type="number" id="price-min" name="min_price" min="0" value="{{ request('min_price', 0) }}" />
+
+                    <label for="price-max">
+                        Max Price: <span id="price-value">{{ request('max_price', 100) }}</span>
+                    </label>
+                    <input type="number" id="price-max" name="max_price" min="0" value="{{ request('max_price', 100) }}" />
+                    <!-- <input type="range" id="price-range" name="max_price" min="0" max="1000"
                         value="{{ request('max_price', 100) }}" step="10"
-                        oninput="document.getElementById('price-value').innerText = this.value" />
+                        oninput="document.getElementById('price-value').innerText = this.value" /> -->
+
+                    <!-- <label>
+                        <input type="checkbox" name="in_stock" {{ request('in_stock') ? 'checked' : '' }} />
+                        In Stock
+                    </label>
+                    <br/> -->
 
                     <label><input type="checkbox" name="in_stock" {{ request('in_stock') ? 'checked' : '' }} /> In
                         Stock</label><br />
+
 
                     @foreach ($categories as $categoryType => $categoryGroup)
                         <label for="category-{{ $categoryType }}">{{ ucfirst($categoryType) }}</label>
@@ -93,7 +107,7 @@
                 </div>
 
                 <div class="pagination">
-                    {{ $products->links() }}
+                    {{ $products->onEachSide(3)->links() }}
                 </div>
             </div>
         </div>

@@ -56,6 +56,10 @@ class ProductController extends Controller
             $query->where('price', '<=', $request->max_price);
         }
 
+        if ($request->has('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
         // In stock filter
         if ($request->boolean('in_stock')) {
             $query->where('in_stock', '>', 0);

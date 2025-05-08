@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Product::factory()->count(20)->create();
+        Product::factory()->count(400)->create();
 
         ProductCategory::factory()->count(10)->create();
 
