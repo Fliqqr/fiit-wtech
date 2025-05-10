@@ -19,7 +19,7 @@ class ProductController extends Controller
         return view('item', compact('product', 'categories'));
     }
 
-    public function new(Request $request) 
+    public function new(Request $request)
     {
         // Validate input
         $validated = $request->validate([
@@ -137,7 +137,7 @@ class ProductController extends Controller
         }
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Product updated!');    
+        return redirect()->back()->with('success', 'Product updated!');
     }
 
     public function edit(Request $request)
@@ -207,6 +207,10 @@ class ProductController extends Controller
 
     public function admin(Request $request)
     {
+        if (!auth()->check() || !auth()->user()->is_admin) {
+            return redirect()->route('home')->with('error', 'You do not have access to the admin panel.');
+        }
+
         $query = Product::query();
 
         $this->applyFilters($query, $request);

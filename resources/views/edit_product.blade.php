@@ -10,17 +10,7 @@
 
 <body>
     <header>
-        <a href="{{ route('home') }}" class="logo">eShop Admin</a>
-        <div class="navbar-actions">
-            <div class="account">
-                @auth
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit">🔓 Logout</button>
-                    </form>
-                @endauth
-            </div>
-        </div>
+        @include('partials.header')
     </header>
 
     <div class="content-wrapper">

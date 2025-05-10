@@ -66,9 +66,8 @@ header .cart a{
     text-decoration: none;
 }
 
-header button,
-header .account a,
-header .cart{
+header .navbar-actions a,
+header .navbar-actions button {
     all: unset;
     cursor: pointer;
     padding: 5px 10px;
@@ -76,11 +75,12 @@ header .cart{
     color: var(--color-background);
     background: var(--color-primary);
     transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
-header button:hover,
-header .account a:hover,
-header .cart:hover{
+header .navbar-actions a:hover,
+header .navbar-actions button:hover {
     background: var(--color-accent);
 }
 
@@ -99,7 +99,11 @@ header .cart:hover{
         padding: 3px 8px;
         font-size: 12px;
     }
-
+    .navbar-actions a,
+    .navbar-actions button {
+        padding: 3px 8px;
+        font-size: 14px;
+    }
     header .account,
     header .cart a {
         padding: 3px 8px;

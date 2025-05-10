@@ -13,7 +13,12 @@
     <header>
         <a href="{{ route('home') }}" class="logo">eShop Admin</a>
         <div class="navbar-actions">
-            <div class="account"><a href="logout">🔒 Logout</a></div>
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="logout">🔓 Logout</button>
+                </form>
+            @endauth
         </div>
     </header>
 

@@ -10,25 +10,7 @@
 
 <body>
     <header>
-        <a href="{{ route('home') }}" class="logo">eShop</a>
-        <div class="search-bar">
-            <input type="text" placeholder="Search products..." />
-            <button type="submit">🔍</button>
-        </div>
-        <div class="navbar-actions">
-            <div class="cart"><a href="{{ route('cart') }}">🛒</a></div>
-            <div class="account">
-                @guest
-                    <a href="{{ route('login') }}">👤 Account</a>
-                @endguest
-                @auth
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit">🔓 Logout</button>
-                    </form>
-                @endauth
-            </div>
-        </div>
+        @include('partials.header')
     </header>
 
     <div class="content-wrapper">
