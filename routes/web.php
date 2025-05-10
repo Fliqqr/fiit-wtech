@@ -21,10 +21,12 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+// Admin stuff
 Route::get('/admin', [ProductController::class, 'admin'])->name('admin.index');
-Route::get('/edit-product', [ProductController::class, 'edit'])->name('edit-product');
-Route::post('/edit-product', [ProductController::class, 'update'])->name('product.update');
-Route::post('/item-new', [ProductController::class, 'new_item'])->name('product.new');
+Route::get('/admin-edit', [ProductController::class, 'edit'])->name('admin.edit');
+
+Route::post('/update-product', [ProductController::class, 'update'])->name('product.update');
+Route::post('/new-product', [ProductController::class, 'new'])->name('product.new');
 
 Route::view('/delivery', 'delivery')->name('delivery');
 Route::view('/login', 'login')->name('login');

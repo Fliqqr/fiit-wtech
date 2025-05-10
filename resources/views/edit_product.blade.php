@@ -24,21 +24,34 @@
     </header>
 
     <div class="content-wrapper">
-        <form class="product-edit-form" action="{{ route('product.update', $product->id) }}" method="POST">
+        <form class="product-edit-form" action="{{ route('product.update', $product->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
             <div class="product-view">
                 <div class="product-gallery">
-                    <label for="main-image">Main Image URL:</label>
-                    <input type="text" id="main-image" name="main_image"
-                        value="{{ old('main_image', $product->image_url) }}" />
+                    <label for="main-image">Main Image:</label>
+                    <input type="file" id="main-image" name="main_image" accept="image/*" />
+
+                    <p>Current Main Image:</p>
+                    <img src="{{ asset('storage/' . $product->image_url) }}" alt="Main Image" width="150" />
 
                     <div class="thumbnail-container">
+                        <p>Additional Images:</p>
                         @foreach ($product->additional_images ?? [] as $i => $thumb)
-                            <label for="thumbnail{{ $i + 1 }}">Thumbnail {{ $i + 1 }} URL:</label>
-                            <input type="text" id="thumbnail{{ $i + 1 }}" name="thumbnails[]"
-                                value="{{ $thumb }}" />
+                            <div class="thumb-group">
+                                <img src="{{ asset('storage/' . $thumb) }}" alt="Thumbnail {{ $i + 1 }}"
+                                    width="100" />
+                                <label>
+                                    <input type="checkbox" name="delete_thumbnails[]" value="{{ $thumb }}" />
+                                    Remove
+                                </label>
+                            </div>
                         @endforeach
+
+                        <label for="new-thumbnails">Add New Thumbnails:</label>
+                        <input type="file" name="new_thumbnails[]" id="new-thumbnails" accept="image/*" multiple />
                     </div>
                 </div>
 
@@ -58,16 +71,26 @@
                     <label for="description">Description:</label>
                     <textarea id="description" name="description" rows="5">{{ old('description', $product->description) }}</textarea>
 
-                    <div class="technical-details">
-                        <h2>Technical Specifications</h2>
-                        <label for="specifications">Specifications (one per line):</label>
-                        <textarea id="specifications" name="specifications" rows="10">{{ old('specifications', is_array($product->specifications) ? implode("\n", $product->specifications) : $product->specifications) }}</textarea>
-                    </div>
+                    <div class="category-section">
+                        <h3>Categories</h3>
+                        @php
+                            $selectedNames = $product->categories->pluck('name')->toArray();
+                            $allCategories = \App\Models\ProductCategory::getCategoriesAsMap();
+                        @endphp
 
-                    <div class="add-to-cart-section">
-                        <label for="default-quantity">Default Quantity:</label>
-                        <input type="number" id="default-quantity" name="default_quantity"
-                            value="{{ old('default_quantity', $product->default_quantity ?? 1) }}" min="1" />
+                        @foreach ($allCategories as $type => $names)
+                            <div class="category-group">
+                                <strong>{{ $type }}</strong><br>
+                                @foreach ($names as $name)
+                                    <label>
+                                        <input type="checkbox" name="categories[{{ $type }}][]"
+                                            value="{{ $name }}"
+                                            {{ in_array($name, $selectedNames) ? 'checked' : '' }}>
+                                        {{ $name }}
+                                    </label><br>
+                                @endforeach
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

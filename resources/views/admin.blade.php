@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel - Products</title>
+    <title>{{ isset($edit_product) ? 'Edit' : 'Add' }} Product - Admin Panel</title>
     @vite(['resources/css/admin.css', 'resources/css/products.css', 'resources/css/base.css', 'resources/css/header.css', 'resources/css/footer.css'])
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body>
@@ -21,37 +20,59 @@
     <div class="content-wrapper">
         <div class="container-wrapper">
             <div class="sidebar">
-                <h2>Admin - Manage Products</h2>
-                <form id="add-product-form" class="admin-form" method="POST" action="{{ route('product.new') }}"
+                <h2>{{ isset($edit_product) ? 'Edit' : 'Add New' }} Product</h2>
+                <form id="edit_product-form" class="admin-form" method="POST"
+                    action="{{ isset($edit_product) ? route('product.update', ['id' => $edit_product->id]) : route('product.new') }}"
                     enctype="multipart/form-data">
                     @csrf
-                    <h3>Add New Product</h3>
+                    @if (isset($edit_product))
+                        @method('POST')
+                    @endif
+
                     <label>Product Name:
-                        <input type="text" name="name" required /></label>
-                    <label>Description:
-                        <textarea name="description" required></textarea>
+                        <input type="text" name="name" value="{{ old('name', $edit_product->name ?? '') }}"
+                            required />
                     </label>
-                    <label>Price: <input type="number" name="price" required /></label>
+
+                    <label>Description:
+                        <textarea name="description" required>{{ old('description', $edit_product->description ?? '') }}</textarea>
+                    </label>
+
+                    <label>Price: <input type="number" name="price"
+                            value="{{ old('price', $edit_product->price ?? '') }}" required /></label>
+
                     <label>Stock Amount:
-                        <input type="number" name="stock" required /></label>
+                        <input type="number" name="stock" value="{{ old('stock', $edit_product->in_stock ?? '') }}"
+                            required />
+                    </label>
 
-                    <label>Images: <input type="file" name="images[]" multiple /></label>
+                    <!-- Image upload for new/edit -->
+                    <label>Images:
+                        <input type="file" name="images[]" multiple />
+                    </label>
 
-                    <!-- Category selection -->
+                    <!-- Current images (for edit only) -->
+                    @if (isset($edit_product) && $edit_product->image_url)
+                        <label>Current Main Image:</label>
+                        <img src="{{ asset('storage/' . $edit_product->image_url) }}" alt="Current Image"
+                            style="width: 100px; height: auto;">
+                    @endif
+
                     @foreach ($categories as $categoryType => $categoryGroup)
                         <fieldset class="category-group">
                             <legend>{{ ucfirst($categoryType) }}</legend>
                             @foreach ($categoryGroup as $category)
                                 <label>
                                     <input type="checkbox" name="categories[{{ $categoryType }}][]"
-                                        value="{{ $category }}">
+                                        value="{{ $category }}"
+                                        {{ isset($edit_product) && in_array($category, $edit_product->categories->pluck('name')->toArray()) ? 'checked' : '' }}>
                                     {{ $category }}
                                 </label>
                             @endforeach
                         </fieldset>
                     @endforeach
 
-                    <button type="submit">Add Product</button>
+                    <button type="submit">{{ isset($edit_product) ? 'Save Changes' : 'Add Product' }}</button>
                 </form>
             </div>
 
@@ -60,7 +81,7 @@
                 <div class="products-grid">
                     @foreach ($products as $product)
                         <div class="product">
-                            <a href="{{ url('/edit-product?id=' . $product->id) }}">
+                            <a href="{{ url('/admin-edit?id=' . $product->id) }}">
                                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}" />
                                 <p>{{ $product->name }}</p>
                                 <p>{{ $product->price }}€</p>
