@@ -31,23 +31,25 @@ class ProductController extends Controller
 
         // \Log::info('Uploaded files:', ['files' => $request->file('images')]);
 
-        // $imageFiles = $request->file('images');
+        $imageFiles = $request->file('images');
+        // dd($imageFiles);
 
-        // $imageUrls = [];
+        $imageUrls = [];
 
-        // foreach ($imageFiles as $file) {
-        //     if ($file && $file->isValid()) {
-        //         $imageUrls[] = $file->store('uploads', 'public');
-        //     }
-        // }
+        foreach ($imageFiles as $file) {
+
+            if ($file && $file->isValid()) {
+                $imageUrls[] = asset('storage/' . $file->store('uploads', 'public'));
+            }
+        }
 
         $product = Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
             'price' => $validated['price'],
             'in_stock' => $validated['stock'],
-            'image_url' => "http://localhost:8000/images/pc.jpg",
-            'additional_images' => null,
+            'image_url' => $imageUrls[0],
+            'additional_images' => array_slice($imageUrls, 1),
         ]);
 
         $categoryInput = $request->input('categories', []);
@@ -106,7 +108,7 @@ class ProductController extends Controller
 
             // Store new images
             foreach ($imageFiles as $file) {
-                $imageUrls[] = $file->store('uploads', 'public');
+                $imageUrls[] = asset('storage/' . $file->store('uploads', 'public'));
             }
 
             // Update the main image (if exists)
@@ -138,17 +140,6 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product updated!');    
     }
 
-
-    // public function edit(Request $request)
-    // {
-    //     $id = $request->query('id');
-    //     $product = Product::findOrFail($id);
-    //     $categories = $product->categories;
-    //     $allCategories = ProductCategory::getCategoriesAsMap();
-
-    //     return view('edit_product', compact('product', 'categories', 'allCategories'));
-    // }
-
     public function edit(Request $request)
     {
         $query = Product::query();
@@ -176,6 +167,11 @@ class ProductController extends Controller
         $id = $request->query('id');
         $edit_product = Product::with('categories')->findOrFail($id);
         $categories = ProductCategory::getCategoriesAsMap();
+
+        $edit_product->all_images = array_filter([
+            $edit_product->image_url,
+            ...($edit_product->additional_images ?? [])
+        ]);
 
         return view('admin', compact('edit_product', 'products', 'categories'));
     }

@@ -6,3 +6,6 @@ db:
 dev: db
 	npm install && npm run build
 	composer run dev
+
+setup:
+	php artisan storage:link

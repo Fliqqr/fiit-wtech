@@ -52,10 +52,21 @@
                     </label>
 
                     <!-- Current images (for edit only) -->
-                    @if (isset($edit_product) && $edit_product->image_url)
-                        <label>Current Main Image:</label>
-                        <img src="{{ asset('storage/' . $edit_product->image_url) }}" alt="Current Image"
-                            style="width: 100px; height: auto;">
+                    @if (isset($edit_product) && $edit_product->all_images)
+                        <div id="current-images" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            @foreach ($edit_product->all_images as $index => $imagePath)
+                                <div class="image-wrapper" style="position: relative;">
+                                    <img src="{{ $imagePath }}" alt="Image {{ $index }}"
+                                        style="width: 100px; height: auto; border: 1px solid #ccc;">
+                                    <button type="button" class="delete-image-btn"
+                                        onclick="markImageForDeletion('{{ $imagePath }}', this)"
+                                        style="position: absolute; top: 0; right: 0; background: red; color: white; border: none; cursor: pointer;">✖</button>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Hidden input that stores which images to delete -->
+                        <input type="hidden" name="delete_images" id="delete-images-input" value="">
                     @endif
 
                     @foreach ($categories as $categoryType => $categoryGroup)
@@ -102,5 +113,16 @@
         <p>Contact | Privacy Policy | Terms of Service</p>
     </footer>
 </body>
+
+<script>
+    let deletedImages = [];
+
+    function markImageForDeletion(imagePath, buttonElement) {
+        deletedImages.push(imagePath);
+        document.getElementById('delete-images-input').value = JSON.stringify(deletedImages);
+        // Hide the image preview
+        buttonElement.closest('.image-wrapper').style.display = 'none';
+    }
+</script>
 
 </html>
