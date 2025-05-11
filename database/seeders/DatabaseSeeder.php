@@ -33,18 +33,61 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Product::factory()->count(400)->create();
+        Product::factory()->count(200)->create();
 
-        ProductCategory::factory()->count(10)->create();
+        // ProductCategory::factory()->count(10)->create();
 
-        $categories = ProductCategory::all();
+        $brands = ['Nvidia', 'Intel', 'AMD', 'ASUS', 'Gigabyte'];
+        $components = ['GPU', 'CPU', 'Motherboard', 'RAM'];
+        $models = range(2012, 2025);
 
-        Product::all()->each(function ($product) use ($categories) {
-            $product->categories()->attach(
-                $categories->random(rand(1, 3))->pluck('id')->toArray()
-            );
+        foreach ($brands as $brand) {
+            ProductCategory::create(['name' => $brand, 'category_type' => 'Brand']);
+        }
+
+        foreach ($components as $component) {
+            ProductCategory::create(['name' => $component, 'category_type' => 'Component']);
+        }
+
+        foreach ($models as $year) {
+            ProductCategory::create(['name' => (string)$year, 'category_type' => 'Model']);
+        }
+
+        // Get categories grouped by type
+        $groupedCategories = ProductCategory::all()->groupBy('category_type');
+
+        Product::all()->each(function ($product) use ($groupedCategories) {
+            $categoryIds = collect();
+
+            foreach (['Brand', 'Model'] as $type) {
+                $categories = $groupedCategories[$type] ?? collect();
+                $categoryIds = $categoryIds->merge(
+                    $categories->random(1)->pluck('id')
+                );
+            }
+
+            $url = strtolower($product->image_url);
+            $componentCategory = null;
+
+            if (strpos($url, 'cpu') !== false) {
+                $componentCategory = 'CPU';
+            } elseif (strpos($url, 'gpu') !== false) {
+                $componentCategory = 'GPU';
+            } elseif (strpos($url, 'ram') !== false) {
+                $componentCategory = 'RAM';
+            } elseif (strpos($url, 'mobo') !== false) {
+                $componentCategory = 'Motherboard';
+            }
+
+            // Attach the corresponding Component category
+            if ($componentCategory) {
+                $componentCategoryId = $groupedCategories['Component']->firstWhere('name', $componentCategory)->id;
+                if ($componentCategoryId) {
+                    $categoryIds->push($componentCategoryId);
+                }
+            }
+
+            $product->categories()->attach($categoryIds->all());
         });
-
-        // InShoppingCart::factory()->count(30)->create();
     }
 }

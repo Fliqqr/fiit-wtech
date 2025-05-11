@@ -18,7 +18,7 @@
 }
 
 .category:hover img {
-    width: 120%;
+    width: 100%;
 }
 
 .category span {
@@ -27,7 +27,7 @@
 }
 
 .category img {
-    width: 100%;
+    width: 80%;
     height: auto;
     /* max-height: 500px; */
     object-fit: cover;
