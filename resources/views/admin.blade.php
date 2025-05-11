@@ -56,7 +56,7 @@
                         <input type="file" name="images[]" multiple />
                     </label>
 
-                    <!-- Current images (for edit only) -->
+                    {{-- <!-- Current images (for edit only) -->
                     @if (isset($edit_product) && $edit_product->all_images)
                         <div id="current-images" style="display: flex; gap: 10px; flex-wrap: wrap;">
                             @foreach ($edit_product->all_images as $index => $imagePath)
@@ -72,7 +72,7 @@
 
                         <!-- Hidden input that stores which images to delete -->
                         <input type="hidden" name="delete_images" id="delete-images-input" value="">
-                    @endif
+                    @endif --}}
 
                     @foreach ($categories as $categoryType => $categoryGroup)
                         <fieldset class="category-group">
